@@ -1,17 +1,17 @@
 import { NextFunction, Request, Response } from "express";
 import { catchAsync } from "../../utils/catchAsync";
 import { sendResponse } from "../../utils/sendResponse";
-import { StateService } from "./state.service";
+import { CityService } from "./city.service";
 
-const getStateByCountryId = catchAsync(
+const getCityByStateId = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     sendResponse(res, {
       success: true,
       statusCode: 200,
-      message: "State route",
-      data: await StateService.getStateByCountryId(req.params.countryId),
+      message: "City route",
+      data: await CityService.getCityByStateId(Number(req.params.stateId)),
     });
   }
 );
 
-export const StateController = { getStateByCountryId };
+export const CityController = { getCityByStateId };

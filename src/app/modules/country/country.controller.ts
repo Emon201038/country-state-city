@@ -16,4 +16,13 @@ const getAllCountry = catchAsync(
   }
 );
 
-export const CountryController = { getAllCountry };
+const getCountryById = catchAsync(async (req: Request, res: Response) => {
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: "Country route",
+    data: await CountryService.getCountryById(Number(req.params.countryId)),
+  });
+});
+
+export const CountryController = { getAllCountry, getCountryById };

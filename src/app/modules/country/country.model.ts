@@ -3,6 +3,9 @@ import { ICountry } from "./country.interface";
 
 const countrySchema = new Schema<ICountry>(
   {
+    id: {
+      type: Number,
+    },
     name: {
       type: String,
     },

@@ -21,4 +21,8 @@ const getAllCountry = async (params: Record<string, string>) => {
   return data;
 };
 
-export const CountryService = { getAllCountry };
+const getCountryById = async (id: number) => {
+  return await Country.findOne({ id });
+};
+
+export const CountryService = { getAllCountry, getCountryById };
