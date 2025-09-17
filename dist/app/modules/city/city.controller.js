@@ -18,7 +18,7 @@ const getCityByStateId = (0, catchAsync_1.catchAsync)((req, res, next) => __awai
         success: true,
         statusCode: 200,
         message: "City route",
-        data: yield city_service_1.CityService.getCityByStateId(Number(req.params.stateId)),
+        data: yield city_service_1.CityService.getCityByStateId(Number(req.params.stateId), req.query),
     });
 }));
 exports.CityController = { getCityByStateId };

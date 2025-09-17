@@ -13,8 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StateService = void 0;
+const queryBuilder_1 = require("../../utils/queryBuilder");
 const state_model_1 = __importDefault(require("./state.model"));
-const getStateByCountryId = (countryId) => __awaiter(void 0, void 0, void 0, function* () {
-    return yield state_model_1.default.find({ country_id: countryId });
+const getStateByCountryId = (countryId, params) => __awaiter(void 0, void 0, void 0, function* () {
+    const builder = new queryBuilder_1.QueryBuilder(state_model_1.default, Object.assign(Object.assign({}, params), { country_id: countryId }));
+    const data = yield builder.filter().search(["name"]).sort().exec();
+    return data;
 });
 exports.StateService = { getStateByCountryId };

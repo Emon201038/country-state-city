@@ -18,7 +18,7 @@ const getStateByCountryId = (0, catchAsync_1.catchAsync)((req, res, next) => __a
         success: true,
         statusCode: 200,
         message: "State route",
-        data: yield state_service_1.StateService.getStateByCountryId(req.params.countryId),
+        data: yield state_service_1.StateService.getStateByCountryId(req.params.countryId, req.query),
     });
 }));
 exports.StateController = { getStateByCountryId };
