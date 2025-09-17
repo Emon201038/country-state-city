@@ -9,7 +9,10 @@ const getStateByCountryId = catchAsync(
       success: true,
       statusCode: 200,
       message: "State route",
-      data: await StateService.getStateByCountryId(req.params.countryId),
+      data: await StateService.getStateByCountryId(
+        req.params.countryId,
+        req.query as Record<string, string>
+      ),
     });
   }
 );

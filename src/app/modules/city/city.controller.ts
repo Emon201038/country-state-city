@@ -9,7 +9,10 @@ const getCityByStateId = catchAsync(
       success: true,
       statusCode: 200,
       message: "City route",
-      data: await CityService.getCityByStateId(Number(req.params.stateId)),
+      data: await CityService.getCityByStateId(
+        Number(req.params.stateId),
+        req.query as Record<string, string>
+      ),
     });
   }
 );

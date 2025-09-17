@@ -1,4 +1,6 @@
-export interface IState {
+import { Document } from "mongoose";
+
+export interface IState extends Document {
   id: number;
   name: string;
   iso2: string;
