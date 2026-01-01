@@ -7,5 +7,5 @@ const express_1 = __importDefault(require("express"));
 const city_controller_1 = require("./city.controller");
 const cityRouter = express_1.default.Router();
 cityRouter.get("/country/:countryId", city_controller_1.CityController.getAllCity);
-cityRouter.get("/:stateId", city_controller_1.CityController.getCityByStateId);
+cityRouter.get("/state/:stateId", city_controller_1.CityController.getCityByStateId);
 exports.default = cityRouter;

@@ -19,14 +19,16 @@ const getCityByStateId = catchAsync(
 
 const getAllCity = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+    const data = await CityService.getAllCity(
+      req.query as Record<string, string>,
+      req.params.countryId
+    );
+    console.log(data, req.params);
     sendResponse(res, {
       success: true,
       statusCode: 200,
       message: "City route",
-      data: await CityService.getAllCity(
-        req.query as Record<string, string>,
-        req.params.countryId
-      ),
+      data,
     });
   }
 );
