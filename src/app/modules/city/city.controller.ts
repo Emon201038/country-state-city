@@ -9,20 +9,15 @@ const getCityByStateId = catchAsync(
       success: true,
       statusCode: 200,
       message: "City route",
-      data: await CityService.getCityByStateId(
-        req.params.stateId,
-        req.query as Record<string, string>
-      ),
+      data: await CityService.getCityByStateId(req.params.stateId),
     });
   }
 );
 
 const getAllCityByCountryId = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
-    const data = await CityService.getAllCityByCountryId(
-      req.params.countryId,
-      req.query as Record<string, string>
-    );
+    const data = await CityService.getAllCityByCountryId(req.params.countryId);
+    console.log(data, req.params);
     sendResponse(res, {
       success: true,
       statusCode: 200,

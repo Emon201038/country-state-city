@@ -14,27 +14,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CityService = void 0;
 const city_model_1 = __importDefault(require("./city.model"));
-const getCityByStateId = (stateId, params) => __awaiter(void 0, void 0, void 0, function* () {
-    return city_model_1.default.aggregate([
+const getCityByStateId = (stateId) => __awaiter(void 0, void 0, void 0, function* () {
+    const totalDoc = yield city_model_1.default.countDocuments();
+    console.log("total city in db: ", totalDoc);
+    return yield city_model_1.default.aggregate([
         {
             $match: {
-                state_id: parseInt(stateId), // MUST match schema type
+                $expr: {
+                    $eq: [{ $toString: "$state_id" }, stateId],
+                },
             },
         },
         {
-            $sort: { name: 1 }, // optional
+            $sort: { name: 1 },
         },
     ]);
 });
-const getAllCityByCountryId = (countryId, params) => __awaiter(void 0, void 0, void 0, function* () {
-    return city_model_1.default.aggregate([
+const getAllCityByCountryId = (countryId) => __awaiter(void 0, void 0, void 0, function* () {
+    const totalDoc = yield city_model_1.default.countDocuments();
+    console.log("total city in db: ", totalDoc);
+    return yield city_model_1.default.aggregate([
         {
             $match: {
-                country_id: parseInt(countryId), // MUST match schema type
+                $expr: {
+                    $eq: [{ $toString: "$country_id" }, countryId],
+                },
             },
         },
         {
-            $sort: { name: 1 }, // optional
+            $sort: { name: 1 },
         },
     ]);
 });

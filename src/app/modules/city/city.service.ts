@@ -1,33 +1,35 @@
 import City from "./city.model";
 
-const getCityByStateId = async (
-  stateId: string,
-  params: Record<string, string>
-) => {
-  return City.aggregate([
+const getCityByStateId = async (stateId: string) => {
+  const totalDoc = await City.countDocuments();
+  console.log("total city in db: ", totalDoc);
+  return await City.aggregate([
     {
       $match: {
-        state_id: parseInt(stateId), // MUST match schema type
+        $expr: {
+          $eq: [{ $toString: "$state_id" }, stateId],
+        },
       },
     },
     {
-      $sort: { name: 1 }, // optional
+      $sort: { name: 1 },
     },
   ]);
 };
 
-const getAllCityByCountryId = async (
-  countryId: string,
-  params: Record<string, string>
-) => {
-  return City.aggregate([
+const getAllCityByCountryId = async (countryId: string) => {
+  const totalDoc = await City.countDocuments();
+  console.log("total city in db: ", totalDoc);
+  return await City.aggregate([
     {
       $match: {
-        country_id: parseInt(countryId), // MUST match schema type
+        $expr: {
+          $eq: [{ $toString: "$country_id" }, countryId],
+        },
       },
     },
     {
-      $sort: { name: 1 }, // optional
+      $sort: { name: 1 },
     },
   ]);
 };
