@@ -2,7 +2,6 @@ import City from "./city.model";
 
 const getCityByStateId = async (stateId: string) => {
   const totalDoc = await City.countDocuments();
-  console.log("total city in db: ", totalDoc);
   return await City.aggregate([
     {
       $match: {
@@ -19,7 +18,6 @@ const getCityByStateId = async (stateId: string) => {
 
 const getAllCityByCountryId = async (countryId: string) => {
   const totalDoc = await City.countDocuments();
-  console.log("total city in db: ", totalDoc);
   return await City.aggregate([
     {
       $match: {

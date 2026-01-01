@@ -16,7 +16,6 @@ exports.CityService = void 0;
 const city_model_1 = __importDefault(require("./city.model"));
 const getCityByStateId = (stateId) => __awaiter(void 0, void 0, void 0, function* () {
     const totalDoc = yield city_model_1.default.countDocuments();
-    console.log("total city in db: ", totalDoc);
     return yield city_model_1.default.aggregate([
         {
             $match: {
@@ -32,7 +31,6 @@ const getCityByStateId = (stateId) => __awaiter(void 0, void 0, void 0, function
 });
 const getAllCityByCountryId = (countryId) => __awaiter(void 0, void 0, void 0, function* () {
     const totalDoc = yield city_model_1.default.countDocuments();
-    console.log("total city in db: ", totalDoc);
     return yield city_model_1.default.aggregate([
         {
             $match: {

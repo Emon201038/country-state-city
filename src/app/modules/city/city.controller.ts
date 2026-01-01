@@ -17,7 +17,6 @@ const getCityByStateId = catchAsync(
 const getAllCityByCountryId = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const data = await CityService.getAllCityByCountryId(req.params.countryId);
-    console.log(data, req.params);
     sendResponse(res, {
       success: true,
       statusCode: 200,
