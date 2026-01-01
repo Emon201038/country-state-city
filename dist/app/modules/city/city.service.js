@@ -20,4 +20,9 @@ const getCityByStateId = (stateId, params) => __awaiter(void 0, void 0, void 0, 
     const data = yield builder.filter().search(["name"]).sort().exec();
     return data;
 });
-exports.CityService = { getCityByStateId };
+const getAllCity = (params, countryId) => __awaiter(void 0, void 0, void 0, function* () {
+    const cities = new queryBuilder_1.QueryBuilder(city_model_1.default, Object.assign(Object.assign({}, params), { country_id: countryId }));
+    const data = yield cities.filter().search(["name"]).sort().exec();
+    return data;
+});
+exports.CityService = { getCityByStateId, getAllCity };

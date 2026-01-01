@@ -21,4 +21,12 @@ const getCityByStateId = (0, catchAsync_1.catchAsync)((req, res, next) => __awai
         data: yield city_service_1.CityService.getCityByStateId(Number(req.params.stateId), req.query),
     });
 }));
-exports.CityController = { getCityByStateId };
+const getAllCity = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    (0, sendResponse_1.sendResponse)(res, {
+        success: true,
+        statusCode: 200,
+        message: "City route",
+        data: yield city_service_1.CityService.getAllCity(req.query, req.params.countryId),
+    });
+}));
+exports.CityController = { getCityByStateId, getAllCity };
