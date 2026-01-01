@@ -13,4 +13,13 @@ const getCityByStateId = async (
   return data;
 };
 
-export const CityService = { getCityByStateId };
+const getAllCity = async (
+  params: Record<string, string>,
+  countryId: string
+) => {
+  const cities = new QueryBuilder(City, { ...params, country_id: countryId });
+  const data = await cities.filter().search(["name"]).sort().exec();
+  return data;
+};
+
+export const CityService = { getCityByStateId, getAllCity };
