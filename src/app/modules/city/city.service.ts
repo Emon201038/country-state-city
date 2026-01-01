@@ -1,25 +1,35 @@
-import { QueryBuilder } from "../../utils/queryBuilder";
 import City from "./city.model";
 
 const getCityByStateId = async (
-  stateId: number,
+  stateId: string,
   params: Record<string, string>
 ) => {
-  const builder = new QueryBuilder(City, {
-    ...params,
-    state_id: stateId.toString(),
-  });
-  const data = await builder.filter().search(["name"]).sort().exec();
-  return data;
+  return City.aggregate([
+    {
+      $match: {
+        state_id: parseInt(stateId), // MUST match schema type
+      },
+    },
+    {
+      $sort: { name: 1 }, // optional
+    },
+  ]);
 };
 
-const getAllCity = async (
-  params: Record<string, string>,
-  countryId: string
+const getAllCityByCountryId = async (
+  countryId: string,
+  params: Record<string, string>
 ) => {
-  const cities = new QueryBuilder(City, { ...params, country_id: countryId });
-  const data = await cities.filter().search(["name"]).sort().exec();
-  return data;
+  return City.aggregate([
+    {
+      $match: {
+        country_id: parseInt(countryId), // MUST match schema type
+      },
+    },
+    {
+      $sort: { name: 1 }, // optional
+    },
+  ]);
 };
 
-export const CityService = { getCityByStateId, getAllCity };
+export const CityService = { getCityByStateId, getAllCityByCountryId };

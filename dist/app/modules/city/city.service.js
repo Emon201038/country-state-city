@@ -13,16 +13,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CityService = void 0;
-const queryBuilder_1 = require("../../utils/queryBuilder");
 const city_model_1 = __importDefault(require("./city.model"));
 const getCityByStateId = (stateId, params) => __awaiter(void 0, void 0, void 0, function* () {
-    const builder = new queryBuilder_1.QueryBuilder(city_model_1.default, Object.assign(Object.assign({}, params), { state_id: stateId.toString() }));
-    const data = yield builder.filter().search(["name"]).sort().exec();
-    return data;
+    return city_model_1.default.aggregate([
+        {
+            $match: {
+                state_id: parseInt(stateId), // MUST match schema type
+            },
+        },
+        {
+            $sort: { name: 1 }, // optional
+        },
+    ]);
 });
-const getAllCity = (params, countryId) => __awaiter(void 0, void 0, void 0, function* () {
-    const cities = new queryBuilder_1.QueryBuilder(city_model_1.default, Object.assign(Object.assign({}, params), { country_id: countryId }));
-    const data = yield cities.filter().search(["name"]).sort().exec();
-    return data;
+const getAllCityByCountryId = (countryId, params) => __awaiter(void 0, void 0, void 0, function* () {
+    return city_model_1.default.aggregate([
+        {
+            $match: {
+                country_id: parseInt(countryId), // MUST match schema type
+            },
+        },
+        {
+            $sort: { name: 1 }, // optional
+        },
+    ]);
 });
-exports.CityService = { getCityByStateId, getAllCity };
+exports.CityService = { getCityByStateId, getAllCityByCountryId };

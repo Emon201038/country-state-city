@@ -18,12 +18,11 @@ const getCityByStateId = (0, catchAsync_1.catchAsync)((req, res, next) => __awai
         success: true,
         statusCode: 200,
         message: "City route",
-        data: yield city_service_1.CityService.getCityByStateId(Number(req.params.stateId), req.query),
+        data: yield city_service_1.CityService.getCityByStateId(req.params.stateId, req.query),
     });
 }));
-const getAllCity = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
-    const data = yield city_service_1.CityService.getAllCity(req.query, req.params.countryId);
-    console.log(data, req.params);
+const getAllCityByCountryId = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield city_service_1.CityService.getAllCityByCountryId(req.params.countryId, req.query);
     (0, sendResponse_1.sendResponse)(res, {
         success: true,
         statusCode: 200,
@@ -31,4 +30,4 @@ const getAllCity = (0, catchAsync_1.catchAsync)((req, res, next) => __awaiter(vo
         data,
     });
 }));
-exports.CityController = { getCityByStateId, getAllCity };
+exports.CityController = { getCityByStateId, getAllCityByCountryId };
